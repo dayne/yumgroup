@@ -1,12 +1,21 @@
-actions :install, :upgrade, :remove
-default_action :install
+resource_name :yumgroup
 
 # The name of the yum group to manage
-attribute :group, kind_of: String, name_attribute: true, required: true
-
+property :group, String, name_property: true, required: true
 # Options to pass to the yum command
-attribute :options, kind_of: String
+property :options, String
 
-attribute :flush_cache, kind_of: Array, default: []
-attribute :cache_error_fatal, kind_of: [TrueClass, FalseClass], default: false
+property :flush_cache, kind_of: Array, default: []
+property :cache_error_fatal, kind_of: [TrueClass, FalseClass], default: false
+
+action :install do
+end
+
+action :upgrade do
+end
+
+action :remove do
+end
+
+
 attr_accessor :exists
