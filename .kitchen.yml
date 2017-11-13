@@ -8,20 +8,22 @@ driver:
 provisioner:
   name: chef_zero
 
+verifier:
+  name: inspec
+
 # Let's make it a policy that we'll keep no more than
 # 3 major revs of a given platform. That should fall
 # close to, or better than, the version support provided by
 # the distribution (ex. remove Centos 5 when Centos 8 is added)
 platforms:
-  - name: centos-5.10
-  - name: centos-6.5
-  - name: centos-7.0
-  - name: fedora-21
+  - name: centos-6.9
+  - name: centos-7.4
+  - name: fedora-24
 
 suites:
   - name: install
     run_list:
-      - recipe[yumgroup::_kitchen_install]
+      - recipe[yumgroup_test::_kitchen_install]
     attributes:
       yum:
         centos:
@@ -30,7 +32,7 @@ suites:
           group: 'web-server'
   - name: upgrade
     run_list:
-      - recipe[yumgroup::_kitchen_upgrade]
+      - recipe[yumgroup_test::_kitchen_upgrade]
     attributes:
       yum:
         centos:
@@ -39,7 +41,7 @@ suites:
           group: 'web-server'
   - name: remove
     run_list:
-      - recipe[yumgroup::_kitchen_remove]
+      - recipe[yumgroup_test::_kitchen_remove]
     attributes:
       yum:
         centos:
